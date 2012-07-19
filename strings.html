@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Strings - Dive Into Python </title><!--[if IE]><script src=j/html5.js></script><![endif]-->
-
+<title>Strings - Dive Into Python 3</title>
+<!--[if IE]><script src=j/html5.js></script><![endif]-->
 <link rel=stylesheet href=dip3.css>
 <style>
 body{counter-reset:h1 4}
@@ -10,35 +10,37 @@ body{counter-reset:h1 4}
 <link rel=stylesheet media=print href=print.css>
 <meta name=viewport content='initial-scale=1.0'>
 <form action=http://www.google.com/cse><div><input type=hidden name=cx value=014021643941856155761:l5eihuescdw><input type=hidden name=ie value=UTF-8>&nbsp;<input type=search name=q size=25 placeholder="powered by Google&trade;">&nbsp;<input type=submit name=sa value=Busca></div></form>
-<p>Você está aqui: <a href=index.html>Home</a> <span class=u>&#8227;</span> <a href=table-of-contents.html#strings>Dive Into Python 3</a> <span class=u>‣</span>
-</p><p id=level>Nível de dificuldade: <span class=u title=intermediário>&#x2666;&#x2666;&#x2666;&#x2662;&#x2662;</span>
-</p><h1>Strings</h1>
+<p>Você está aqui: <a href=index.html>Home</a> <span class=u>&#8227;</span> <a href=table-of-contents.html#strings>Dive Into Python 3</a> <span class=u>&#8227;</span>
+<p id=level>Nível de dificuldade: <span class=u title=intermediário>&#x2666;&#x2666;&#x2666;&#x2662;&#x2662;</span>
+<h1>Strings</h1>
 <blockquote class=q>
 <p><span class=u>&#x275D;</span> Eu estou lhe dizendo isso porque você é um dos meus amigos.<br> Meu alfabeto começa onde termina o seu alfabeto! <span class=u>&#x275E;</span><br>&mdash; Dr. Seuss, On Beyond Zebra!
 </blockquote>
-</p><p id=toc>&nbsp;
-</p><h2 id=boring-stuff>Algumas Coisas Chatas Que Você Precisa Entender Antes de Poder Mergulhar</h2>
-<p class=f>Poucas pessoas pensam sobre isso, mas o texto é incrivelmente complicado. Comece com o alfabeto. As pessoas de <a href=http://pt.wikipedia.org/wiki/Bougainville_(prov%C3%ADncia)>Bougainville</a> tem o menor alfabeto do mundo; seu <a href=http://pt.wikipedia.org/wiki/Alfabeto_rotokas>alfabeto Rotokas</a> é composto de apenas 12 letras: A, E, G, I, K, O, P, R, S, T, U, e V. Do outro lado da espectro, nos idiomas Chinês, Japonês e Coreano tem milhares de caracteres. Inglês, são 26 letras&nbsp;&mdash;&nbsp;52 se você contar maiuscúlas e minúsculas separadamente&nbsp;&mdash;&nbsp;mais um punhado de <i class=baa>!@#$%&amp;</i> e sinais de pontuação.
+<p id=toc>&nbsp;
+<h2 id=boring-stuff>Algumas Coisas Chatas Que Você Precisa Entender Antes de Poder Mergulhar</h2>
+<p class=f>Poucas pessoas pensam sobre isso, mas um texto é incrivelmente complicado. Comece com o alfabeto. As pessoas de <a href=http://pt.wikipedia.org/wiki/Bougainville_(prov%C3%ADncia)>Bougainville</a> tem o menor alfabeto do mundo; seu <a href=http://pt.wikipedia.org/wiki/Alfabeto_rotokas>alfabeto Rotokas</a> é composto de apenas 12 letras: A, E, G, I, K, O, P, R, S, T, U, e V. Do outro lado da espectro, nos idiomas Chinês, Japonês e Coreano há milhares de caracteres. Inglês, são 26 letras&nbsp;&mdash;&nbsp;52 se você contar maiuscúlas e minúsculas separadamente&nbsp;&mdash;&nbsp;mais um punhado de <i class=baa>!@#$%</i> e sinais de pontuação.
 
-<p>Quando você fala &#8220;texto,&#8221; provavelmente você está pensando em &#8220;caracteres e simbolos na tela do computador&#8221;. Mas os computadores não lidam com caracteres ou simbolos, eles lidam com bits e bytes. Cada pedaço de texto que você já viu na tela do computador é armazenado em uma <i>codificação de caracteres</i> particular. Em termos muito gerais, a codificação de caracteres fornece um mapeamento entre as coisas que você vê na tela e as coisas do seu computador realmente armazena na memória e no disco. Há muitas codificações de caracteres diferentes, algumas otimizadas para determinados idiomas como o russo ou chinês ou Inglês, e outros que podem ser usados ​​para vários idiomas.
+<p>Quando você fala &#8220;texto,&#8221; provavelmente você está pensando em &#8220;caracteres e símbolos na tela do computador&#8221;. Mas os computadores não lidam com caracteres ou simbolos, eles lidam com bits e bytes. Cada pedaço de texto que você já viu na tela do computador é armazenado em uma <i>codificação de caracteres</i> particular. Em termos muito gerais, a codificação de caracteres fornece um mapeamento entre as coisas que você vê na tela e as coisas que seu computador realmente armazena na memória e no disco. Há muitas codificações de caracteres diferentes, algumas otimizadas para determinados idiomas como o russo ou chinês ou Inglês, e outros que podem ser usados ​​para vários idiomas.
 
-<p>Na realidade, é mais complicado do que isto. Muitos caracteres são comuns a várias codificações, mas cada codificação pode usar uma sequência diferente de bytes e como são realmente armazenados seus caracteres em memória ou disco. Então você pode pensar na codificação de caracteres como uma espécie de chave de decifração. Sempre que alguém lhe dá uma seqüência de bytes&nbsp;&mdash;&nbsp;um arquivo, uma página web, qualquer que seja&nbsp;&mdash;&nbsp;e afirma que é "texto", você precisa saber qual a codificação de caracteres ele usou para que você possa decodificar os bytes em caracteres. Se te dão a chave errada ou nenhuma chave, você é deixado com uma tarefa inviável de decifrar o código por si só. Provavelmente você irá errar, e o resultado será ininteligível. <aside>Tudo o que você achava que sabia sobre strings está errado.</aside>
+<p>Na realidade, é mais complicado do que isto. Muitos caracteres são comuns a várias codificações, mas cada codificação pode usar uma sequência diferente de bytes e como são realmente armazenados seus caracteres em memória ou disco. Então você pode pensar na codificação de caracteres como uma espécie de chave de decifração. Sempre que alguém lhe dá uma seqüência de bytes&nbsp;&mdash;&nbsp;um arquivo, uma página web, qualquer que seja&nbsp;&mdash;&nbsp;e afirma que é "texto", você precisa saber qual a codificação de caracteres ele usou para que você possa decodificar os bytes em caracteres. Se te dão a chave errada ou nenhuma chave, você é deixado com uma tarefa inviável de decifrar o código por si só. Provavelmente você irá errar, e o resultado será ininteligível. 
+
+<aside>Tudo o que você achava que sabia sobre strings está errado.</aside>
 
 <p>Certamente você já viu páginas da web como esta, com caracteres de interrogação estranhos aonde deveriam ser apóstrofos. Isto geralmente significa que o autor da página não declarou corretamente qual a codificação, e seu navegador escolheu uma codificação diferente e o resultado foi uma mistura de caracteres esperados e outros não. Em Inglês é apenas desagradável; em outras línguas, o resultado pode ser completamente ilegível.
 
-<p>Há codificações de caracterese para cada idioma importante no mundo. Uma vez que cada idioma é diferente, e a memória e o espaço em disco têm sido historicamente caro, cada codificação de caracteres é otimizado para um idioma particular. Por isso, quero dizer que cada codificação utiliza os mesmos números (0-255) para representar caracteres do idioma. Por exemplo, você provavelmente está familiarizado com a codificação <abbr>ASCII</abbr>, que armazena caracteres ingleses com números que variam de 0 a 127. (65 é a letra maiúscula "A", 97 é a letra minúscula "a", <i class=baa>&amp;</i> c). O inglês tem um alfabeto muito simples, para que pode ser completamente expresso em menos de 128 números. Para aqueles de vocês que podem contar na base 2, estes são 7 dos 8 bits em um byte.
+<p>Há codificações de caracterese para cada idioma importante no mundo. Uma vez que cada idioma é diferente, e a memória e o espaço em disco têm sido historicamente caros, cada codificação de caracteres é otimizado para um idioma particular. Por isso, quero dizer que cada codificação utiliza os mesmos números (0-255) para representar caracteres do idioma. Por exemplo, você provavelmente está familiarizado com a codificação <abbr>ASCII</abbr>, que armazena caracteres ingleses com números que variam de 0 a 127. (65 é a letra maiúscula &#8220;A&#8221;, 97 é a letra minúscula &#8220;a&#8221;). O inglês tem um alfabeto muito simples, para que pode ser completamente expresso em menos de 128 números. Para aqueles de vocês que podem contar na base 2, estes são 7 dos 8 bits em um byte.
 
-<p>Idiomas da Europa Ocidental como o francês, espanhol e alemão tem mais letras do que o idioma inglês. Ou, mais precisamente, eles têm letras combinadas com vários sinais diacríticos, como o caracter <code>ñ</code> em espanhol. A codificação mais comum deste idioma é o CP-1252, também chamado "windows-1252"  porque ser largamente utilizado no Microsoft Windows. A codificação CP-1252 compartilha com o <abbr>ASCII</abbr> os caracteres na faixa de 0-127, mas depois se estende na faixa de 128-255 para caracteres como ñ (241) e ü(252). É ainda uma codificação single-byte, embora o maior número possível, 255, ainda cabe em um byte.
+<p>Idiomas da Europa Ocidental como o francês, espanhol e alemão tem mais letras do que o idioma inglês. Ou, mais precisamente, eles têm letras combinadas com vários sinais diacríticos, como o carácter <code>&ntilde;</code> em espanhol. A codificação mais comum deste idioma é o CP-1252, também chamado &#8220;windows-1252&#8221;  porque ser largamente utilizado no Microsoft Windows. A codificação CP-1252 compartilha com o <abbr>ASCII</abbr> os caracteres na faixa de 0&ndash;127, mas depois se estende na faixa de 128&ndash;255 para caracteres como &ntilde; (241) e ü(252). É ainda uma codificação single-byte, embora o maior número possível, 255, ainda cabe em um byte.
 
-<p>Depois, há idiomas como chinês, japonês e coreano, que tem tantos caracteres que exigem conjuntos com múltiplos bytes por caractere. Ou seja, cada &#8220;caracter&#8221; é representado por um número de dois bytes de 0 à 65535. Mas diferentes codificações multi-byte ainda compartilham o mesmo problema de codificações single-byte diferentes, ou seja, que cada uma usa os mesmos números para significar coisas diferentes. É justo que o intervalo de números é mais amplo, porque há muito mais caracteres para representar.
+<p>Depois, há idiomas como chinês, japonês e coreano, que tem tantos caracteres que exigem conjuntos com múltiplos bytes por caracter. Ou seja, cada &#8220;caracter&#8221; é representado por um número de dois bytes de 0 à 65535. Mas diferentes codificações multi-byte ainda compartilham o mesmo problema de codificações single-byte diferentes, ou seja, que cada uma usa os mesmos números para significar coisas diferentes. É justo que o intervalo de números é mais amplo, porque há muito mais caracteres para representar.
 
 <p>Isso ficou OK num mundo sem rede, onde o "texto" era algo que você digitou para si mesmo e, ocasionalmente foi impresso. Não há muito "texto simples". O código-fonte foi <abbr>ASCII</abbr>, e os processadores de texto mais usados​​ que definiram os seus próprios formatos(não-texto) de como seria a codificação e  juntamente com seus estilos. As pessoas que leiam estes documentos com o mesmo programa de processamento de texto como o autor original, então tudo funcionará, mais ou menos.
 
-<p>Agora pense sobre o surgimento das redes globais como e-mail e web. Lotes de "textos simples" que voam ao redor do globo, sendo o autor em um computador, transmitido através de um segundo computador, e recebidos e apresentados por um terceiro computador. Computadores só podem ver os números, mas os números podem significar coisas diferentes. Oh não! O que fazer? Bem, os sistemas tinham de ser projetado para transportar informações de codificação junto com cada peça de "texto puro." Lembre-se, é a chave de descriptografia que mapeia números legíveis por computador para caracteres legíveis por humanos. Uma chave de descriptografia faltando significa um texto ilegível, ininteligível, ou pior.
+<p>Agora pense sobre o surgimento das redes globais como e-mail e web. Lotes de &#8220;textos simples&#8221; que voam ao redor do globo, sendo o autor em um computador, transmitido através de um segundo computador, e recebidos e apresentados por um terceiro computador. Computadores só podem ver os números, mas os números podem significar coisas diferentes. Oh não! O que fazer? Bem, os sistemas tinham de ser projetados para transportar informações de codificação junto com cada peça de &#8220;texto puro&#8221;. Lembre-se, é a chave de descriptografia que mapeia números legíveis por computador para caracteres legíveis por humanos. Uma chave de descriptografia faltando significa um texto ilegível, ininteligível, ou pior.
 
-<p>Agora pense em tentar armazenar múltiplos pedaços de texto no mesmo lugar, como na mesma tabela de  banco de dados todos os emails que você já recebeu. Você ainda precisa armazenar a codificação de caracteres junto de cada pedaço de texto para que possa exibi-lo corretamente. Acha que isso é difícil? Tente procurar em seu banco de dados um e-mail, o que significa a conversão a todo momento entre várias codificações. Isto não parece ser divertido?
+<p>Agora pense em tentar armazenar múltiplos pedaços de texto no mesmo lugar, como na mesma tabela de  banco de dados todos os emails que você já recebeu. Você ainda precisa armazenar a codificação dos caracteres junto de cada pedaço de texto para que possa exibí-lo corretamente. Acha que isso é difícil? Tente procurar em seu banco de dados um e-mail, o que significa a conversão a todo momento entre várias codificações. Isto não parece ser divertido?
 
-<p>Agora pense sobre a possibilidade de documentos multilíngues, onde os caracteres de vários idiomas são próximos uns dos outros no mesmo documento. (Dica: programas que tentam fazer isto normalmente usam escape codes para alterar os "modos". Poof, você está em modo Russo koi8-r, então o 241 significa Я; poof, agora você está em modo Mac Greek, então o 241 significa ώ.) E é claro que você vai querer procurar <em>estes</em>  documentos também.
+<p>Agora pense sobre a possibilidade de documentos multilíngues, onde os caracteres de vários idiomas são próximos uns dos outros no mesmo documento. (Dica: programas que tentam fazer isto normalmente usam escape codes para alterar os "modos". Puuf, você está em modo Russo koi8-r, então o 241 significa Я; puuf, agora você está em modo Mac Greek, então o 241 significa ώ.) E é claro que você vai querer procurar <em>estes</em>  documentos também.
 
 <p>Agora pode chorar muito, porque tudo o que você achava que sabia sobre strings é errado, e não há nenhuma coisa como &#8220;texto simples&#8221;.
 
@@ -48,52 +50,52 @@ body{counter-reset:h1 4}
 
 <p><i>Entrando no <dfn>Unicode</dfn>.</i>
 
-<p>Unicode é uma sistema projetado para representar <em>todos</em> os caracteres de <em>todos</em> idiomas. Unicode representa cada letra, caractere, ou ideograma como um número de 4 bytes. Cada número representa um carácter único utilizado em pelo menos em uma das línguas do mundo. (Nem todos os números são usados, mas mais de 65.535 deles são, de modo que 2 bytes não seriam suficientes). Caracteres que são usados ​​em vários idiomas geralmente têm o mesmo número, a menos que haja uma boa razão etimológica para não. Independentemente disso, há exatamente um número por caracter, e exatamente um caracter por número. Cada número sempre significa apenas uma coisa, não há necessidade para se manter um par. <code>U+0041</code> é sempre <code>'A'</code>, mesmo se seu idioma não tem um <code>'A'</code> nele.
+<p>Unicode é uma sistema projetado para representar <em>todos</em> os caracteres de <em>todos</em> idiomas. Unicode representa cada letra, caracter, ou ideograma como um número de 4 bytes. Cada número representa um carácter único utilizado em pelo menos em uma das línguas do mundo. (Nem todos os números são usados, mas mais de 65.535 deles são, de modo que 2 bytes não seriam suficientes). Caracteres que são usados ​​em vários idiomas geralmente têm o mesmo número, a menos que haja uma boa razão etimológica para não. Independentemente disso, há exatamente um número por caracter, e exatamente um carácter por número. Cada número sempre significa apenas uma coisa, não há necessidade para se manter um par. <code>U+0041</code> é sempre <code>'A'</code>, mesmo se seu idioma não tem um <code>'A'</code> nele.
 
-<p>De cara com isto, parece ser uma boa ideia. Uma regra de codificação única à todos. Vários idiomas por documento. Não há mais "modo de comutação" para alternar entre as codificações no meio do caminho. Mas logo em seguida, a pergunta óbvia deve surgir de você. Quatro bytes? Para cada caractere <span class=u title='interrobang!'>&#8253;</span> Isso parece muito desperdício, especialmente para idiomas como Inglês e Espanhol, que necessitam de menos de um byte (256 números) para expressar todos os caracteres possíveis. Na verdade, é um desperdício, mesmo para idiomas baseados em ideogramas(como o chinês), que nunca precisam de mais de dois bytes por caractere.
+<p>De cara com isto, parece ser uma boa ideia. Uma regra de codificação única à todos. Vários idiomas por documento. Não há mais "modo de comutação" para alternar entre as codificações no meio do caminho. Mas logo em seguida, a pergunta óbvia deve surgir de você. Quatro bytes? Para cada carácter <span class=u title='interrobang!'>&#8253;</span> Isso parece muito desperdício, especialmente para idiomas como Inglês e Espanhol, que necessitam de menos de um byte (256 números) para expressar todos os caracteres possíveis. Na verdade, é um desperdício, mesmo para idiomas baseados em ideogramas(como o chinês), que nunca precisam de mais de dois bytes por caracter.
 
-<p>Há uma codificação Unicode que usa quatro bytes por caractere. Chama-se UTF-32, porque 32 bits = 4 bytes. UTF-32 é uma codificação simples, cada caractere Unicode usa um número de 4 bytes e representa o caráter com o mesmo número. Isto tem algumas vantagens, sendo a mais importante que você pode encontrar o <var>enésimo</var> caractere de uma string diretamente, porque o <var>enésimo</var> caractere começa no <var>4&times;N</var> byte. Ele também tem várias desvantagens, sendo a mais óbvia que leva quatro bytes para armazenar cada caracter.
+<p>Há uma codificação Unicode que usa quatro bytes por caracter. Chama-se UTF-32, porque 32 bits = 4 bytes. UTF-32 é uma codificação simples, cada carácter Unicode usa um número de 4 bytes e representa o caráter com o mesmo número. Isto tem algumas vantagens, sendo a mais importante que você pode encontrar o <var>enésimo</var> carácter de uma string diretamente, porque o <var>enésimo</var> carácter começa no <var>4&times;N</var> byte. Ele também tem várias desvantagens, sendo a mais óbvia que leva quatro bytes para armazenar cada caracter.
 
-<p>Mesmo que haja um monte de caracteres Unicode, verifica-se que a maioria das pessoas nunca vai usar nada além dos primeiros 65535. Assim, há outra codificação Unicode, chamada UTF-16 (porque 16 bits = 2 bytes). UTF-16 codifica todos os caracteres entre 0-65535 com dois bytes, em seguida, usa alguns golpes sujos, se você realmente precisa para representar os caracteres raramente usados ​​ do "plano astral" do Unicode para além de 65535. Vantagem mais óbvia: UTF-16 usa a metade do espaço do UTF-32, porque todos os caracteres requer apenas dois bytes para armazenar, em vez de quatro bytes (exceto para os que não o fazem). E você ainda pode encontrar facilmente o <var>enésimo</var> caractere de uma string diretamente, se você assumir que a string não inclui quaisquer caracter do plano astral, que é uma boa hipótese direita até o momento em que um não é.
+<p>Mesmo que haja um monte de caracteres Unicode, verifica-se que a maioria das pessoas nunca vai usar nada além dos primeiros 65535. Assim, há outra codificação Unicode, chamada UTF-16 (porque 16 bits = 2 bytes). UTF-16 codifica todos os caracteres entre 0-65535 com dois bytes, em seguida, usam-se alguns golpes sujos, se você realmente precisa para representar os caracteres raramente usados ​​ do "plano astral" do Unicode para além de 65535. Vantagem mais óbvia: UTF-16 usa a metade do espaço do UTF-32, porque todos os caracteres requerem apenas dois bytes para armazenar, em vez de quatro bytes (exceto para os que não o fazem). E você ainda pode encontrar facilmente o <var>enésimo</var> carácter de uma string diretamente, se você assumir que a string não inclui quaisquer carácter do plano astral, que é uma boa hipótese  até o momento em que um não é.
 
-<p>Mas também há não-óbvias desvantagens para ambos UTF-32 e UTF-16. Diferentes sistemas de computador armazenam bytes individuais de diferentes maneiras. Isso significa que o caractere <code>U+4E2D</code> poderia ser armazenado em UTF-16 como <code>4E 2D</code> ou <code>2D 4E</code>, dependendo se o sistema é big-endian ou little-endian. (Para UTF-32, existem ainda mais possibilidades de ordenamento dos bytes). Enquanto seus documentos nunca deixarem o seu computador, você estará seguro&nbsp;&mdash;&nbsp;aplicações diferentes no mesmo computador usam a mesma ordenação dos byte. Mas no minuto em que você deseja transferir documentos entre sistemas, talvez em uma rede mundial de computadores de alguma maneira, você vai precisar de uma forma para indicar que ordem os bytes estão armazenados. Caso contrário, no sistema de recebimento não tem como saber se os dois-byte da seqüência <code>4E 2D </code> signfica <code>U+4E2D</code> ou <code>U+2D4E</code>.
+<p>Mas também há não-óbvias desvantagens para ambos UTF-32 e UTF-16. Diferentes sistemas de computador armazenam bytes individuais de diferentes maneiras. Isso significa que o carácter <code>U+4E2D</code> poderia ser armazenado em UTF-16 como <code>4E 2D</code> ou <code>2D 4E</code>, dependendo se o sistema é big-endian ou little-endian. (Para UTF-32, existem ainda mais possibilidades de ordenamento dos bytes). Enquanto seus documentos nunca deixarem o seu computador, você estará seguro&nbsp;&mdash;&nbsp;aplicações diferentes no mesmo computador usam a mesma ordenação dos byte. Mas no minuto em que você deseja transferir documentos entre sistemas, talvez em uma rede mundial de computadores de alguma maneira, você vai precisar de uma forma para indicar que ordem os bytes estão armazenados. Caso contrário, no sistema de recebimento não tem como saber se os dois-byte da seqüência <code>4E 2D </code> signficam <code>U+4E2D</code> ou <code>U+2D4E</code>.
 
-<p>Para resolver <em>este</em> problema, as codificações multi-byte Unicode definiem uma Marcação de ordem dos Byte("Byte Order Mark"), que é um caractere especial não imprimível que você pode incluir no início do seu documento para indicar qual a ordenação dos bytes. Para UTF-16, o Byte Order Mark é <code>U+FEFF</code>. Se você receber um documento UTF-16 que começa com os bytes <code>FF FE</code>, você sabe qual a ordem dos byte esta é uma maneira, se ele começa com <code>FE FF</code>, você sabe que a ordenação dos bytes é invertida.
+<p>Para resolver <em>este</em> problema, as codificações multi-byte Unicode definem uma Marcação de ordem dos Byte("Byte Order Mark"), que é um carácter especial não imprimível que você pode incluir no início do seu documento para indicar qual a ordenação dos bytes. Para UTF-16, o Byte Order Mark é <code>U+FEFF</code>. Se você receber um documento UTF-16 que começa com os bytes <code>FF FE</code>, você sabe qual a ordem dos byte esta é uma maneira, se ele começa com <code>FE FF</code>, você sabe que a ordenação dos bytes é invertida.
 
-<p>Ainda assim, UTF-16 não é exatamente ideal, especialmente se você está lidando com um monte de caracteres <abbr>ASCII</abbr>. Se você pensar sobre isso, até mesmo uma página web chinesa vai conter um monte de caracteres <abbr>ASCII</abbr> &nbsp;&mdash;&nbsp;todos os elementos e atributos que cercam os caracteres imprimíveis chineses. Ser capaz de encontrar o <var>enésimo</var> caracter diretamente é bom, mas ainda há um problema irritante desses caracteres do plano astral, o que significa que você não pode <em>garantir</em> que todo caractere tem exatamente dois bytes, então você não pode <em>realmente</em> encontrar o <var>enésimo</var> caractere diretamente, a menos que você mantenha um índice separado. E aí rapaz, lá com certeza há um monte de textos <abbr>ASCII</abbr> no mundo ...
+<p>Ainda assim, UTF-16 não é exatamente ideal, especialmente se você está lidando com um monte de caracteres <abbr>ASCII</abbr>. Se você pensar sobre isso, até mesmo uma página web chinesa vai conter um monte de caracteres <abbr>ASCII</abbr> &nbsp;&mdash;&nbsp;todos os elementos e atributos que cercam os caracteres imprimíveis chineses. Ser capaz de encontrar o <var>enésimo</var> carácter diretamente é bom, mas ainda há um problema irritante desses caracteres do plano astral, o que significa que você não pode <em>garantir</em> que todo carácter tem exatamente dois bytes, então você não pode <em>realmente</em> encontrar o <var>enésimo</var> carácter diretamente, a menos que você mantenha um índice separado. E aí rapaz, lá com certeza há um monte de textos <abbr>ASCII</abbr> no mundo ...
 
 <p>Outras pessoas ponderaram essas questões, e elas vieram com uma solução:
 
 <p class=xxxl>UTF-8
 
-<p>UTF-8 é um sistema de codificação de <em>comprimento variável</em> para Unicode. É isto, diferentes caracteres levam um número diferente de bytes. Para caracteres <abbr>ASCII</abbr> (A-Z) O <abbr>UTF-8</abbr> usa apenas um byte por caractere. Na verdade, ele usa os exatos bytes; os primeiros 128 caracteres (0-127) do <abbr>UTF-8</abbr> são indistinguíveis <abbr>ASCII</abbr>. A extensão latina de caracteres tem o ñ e ö que usam dois bytes. (Os bytes não são o único ponto no Unicode como é o caso do UTF-16; Há alguns detalhes no arranjo dos bits) Caracteres chineses como o 中 acabam usando três bytes. Os raramente usados caracteres do "plano astral" usam quatro bytes.
+<p>UTF-8 é um sistema de codificação de <em>comprimento variável</em> para Unicode. É isto, diferentes caracteres levam um número diferente de bytes. Para caracteres <abbr>ASCII</abbr> (A-Z) o <abbr>UTF-8</abbr> usa apenas um byte por caractere. Na verdade, ele usa os exatos bytes; os primeiros 128 caracteres (0-127) do <abbr>UTF-8</abbr> são indistinguíveis <abbr>ASCII</abbr>. A extensão latina de caracteres tem o ñ e ö que usam dois bytes. (Os bytes não é o único ponto no Unicode como é o caso do UTF-16; Há alguns detalhes no arranjo dos bits) Caracteres chineses como o &#x4E2D; acabam usando três bytes. Os raramente usados caracteres do &#8220;plano astral&#8221; usam quatro bytes.
 
-<p>Desvantagens: pois cada caracter pode ter um número diferente de bytes, encontrar o <var>enésimo</var> caractere é uma operação O(N)&nbsp;&mdash;&nbsp;ou seja, quanto maior for a string, mais tempo demora para encontrar um carácter específico. Além, há um arranjo dos bits para codificar caracteres em bytes e decodificar bytes em caracteres.
+<p>Desvantagens: pois cada carácter pode ter um número diferente de bytes, encontrar o <var>enésimo</var> carácter é uma operação O(N)&nbsp;&mdash;&nbsp;ou seja, quanto maior for a string, mais tempo demora para encontrar um carácter específico. Além, há um arranjo dos bits para codificar caracteres em bytes e decodificar bytes em caracteres.
 
-<p>Vantagens: codificação super-eficiente de caracteres <abbr>ASCII</abbr> comuns. Nem pior do que o UTF-16 para extesão latina de caracteres. Melhor do que o UTF-32 para caracteres chineses. Além disso (e você vai ter que confiar em mim, porque eu não estou indo mostrar-lhe a matemática), devido à natureza exata do arranjo dos bits, não há problemas na ordenação dos bytes. Um documento codificado em <abbr>UTF-8</abbr> usa exatamente mesmo arranjo dos bytes em qualquer computador.
+<p>Vantagens: codificação super-eficiente de caracteres <abbr>ASCII</abbr> comuns. Nem pior do que o UTF-16 para extesão latina de caracteres. Melhor do que o UTF-32 para caracteres chineses. Além disso (e você vai ter que confiar em mim, porque eu não estou indo mostrar-lhe a matemática), devido à natureza exata do arranjo dos bits, não há problemas na ordenação dos bytes. Um documento codificado em <abbr>UTF-8</abbr> usa exatamente o mesmo arranjo dos bytes em qualquer computador.
 
-<p class=a>⁂
+<p class=a>&#x2042;
 
-<h2 id=divingin>Mergulho em</h2>
+<h2 id=divingin>Mergulhando no</h2>
 
-<p>Em Python 3, todas as strings são sequências de caracteres Unicode. Não há nenhuma coisa semelhante como uma string Python codificada em <abbr>UTF-8</abbr>, ou uma string Python codificada com CP-1252. "Esta é uma string <abbr>UTF-8</abbr>?" É uma questão inválida. <abbr>UTF-8</abbr> é uma forma de codificação de caracteres como uma seqüência de bytes. Se você tiver uma string e quiser transformá-la em uma seqüência de bytes com uma codificação de caracteres particular, Python 3 pode te ajudar com isso. Se você quiser ter uma seqüência de bytes e transformá-la em uma string, Python 3 pode ajudá-lo com isso também Bytes não são caracteres; bytes são bytes. Os caracteres são uma abstração. Uma string é uma seqüência dessas abstrações.
+<p>Em Python 3, todas as strings são sequências de caracteres Unicode. Não há nenhuma coisa semelhante como uma string Python codificada em <abbr>UTF-8</abbr>, ou uma string Python codificada com CP-1252. "Esta é uma string <abbr>UTF-8</abbr>?" É uma questão inválida. <abbr>UTF-8</abbr> é uma forma de codificação de caracteres como uma seqüência de bytes. Se você tiver uma string e quiser transformá-la em uma seqüência de bytes com uma codificação de caracteres particular, Python 3 pode te ajudar com isso. Se você quiser ter uma seqüência de bytes e transformá-la em uma string, Python 3 pode ajudá-lo com isso também. Bytes não são caracteres; bytes são bytes. Os caracteres são uma abstração. Uma string é uma seqüência dessas abstrações.
 
 <pre class=screen>
-<a><samp class=p>>>> </samp><kbd class=pp>s = '深入 Python'</kbd>    <span class=u>①</span></a>
-<a><samp class=p>>>> </samp><kbd class=pp>len(s)</kbd>               <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>s = '深入 Python'</kbd>    <span class=u>&#x2460;</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>len(s)</kbd>               <span class=u>&#x2461;</span></a>
 <samp class=pp>9</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>s[0]</kbd>                 <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>s[0]</kbd>                 <span class=u>&#x2462;</span></a>
 <samp class=pp>'深'</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>s + ' 3'</kbd>             <span class=u>④</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>s + ' 3'</kbd>             <span class=u>&#x2463;</span></a>
 <samp class=pp>'深入 Python 3'</samp></pre>
 <ol>
-<li>Para criar uma string, coloque-a entre aspas. Strings Python podem ser definidas com aspas simples (<code> '</code>) ou duplas (<code> "</code>).<!--"-->
-</li><li>A função built-in <code><dfn>len</dfn>()</code> retorna o comprimento da string, <i>ou seja</i> o número de caracteres. Esta é a mesma função que você usa para <a href=native-datatypes.html#extendinglists>encontrar o comprimento de uma lista, tupla, conjunto, ou dicionário</a>. Uma string é como uma tupla de caracteres.
+<li>Para criar uma string, coloque-a entre aspas. Strings Python podem ser definidas com aspas simples (<code>'</code>) ou duplas (<code>"</code>).<!--"-->
+</li><li>A função built-in <code><dfn>len</dfn>()</code> retorna o comprimento da string, ou seja o número de caracteres. Esta é a mesma função que você usa para <a href=native-datatypes.html#extendinglists>encontrar o comprimento de uma lista, tupla, conjunto, ou dicionário</a>. Uma string é como uma tupla de caracteres.
 </li><li>Assim como a obtenção de itens individuais de uma lista, você pode obter caracteres individuais de uma string usando a notação de índice.
 </li><li>Assim como listas, você pode <dfn>concatenar</dfn> strings usando o operador <code>+</code>.
 </li></ol>
 
-<p class=a>⁂
+<p class=a>&#x2042;
 
 <h2 id=formatting-strings>Formatando Strings</h2>
 
@@ -101,12 +103,11 @@ body{counter-reset:h1 4}
 <p>Vamos dar mais uma olhada em <a href=your-first-python-program.html#divingin><code>humansize.py</code></a>:
 
 <p class=d>[<a href=examples/humansize.py>download <code>humansize.py</code></a>]
-
-<pre class=pp><code><a>SUFFIXES = {1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],         <span class=u>①</span></a>
+<pre class=pp><code><a>SUFFIXES = {1000: ['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],         <span class=u>&#x2460;</span></a>
             1024: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']}
 
 def approximate_size(size, a_kilobyte_is_1024_bytes=True):
-<a>    '''Converter um tamanho de arquivo para uma forma legível.                          <span class=u>②</span></a>
+<a>    '''Converter um tamanho de arquivo para uma forma legível.                          <span class=u>&#x2461;</span></a>
 
     Argumentos:
     size -- tamanho do arquivo em bytes
@@ -123,23 +124,23 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
     for suffix in SUFFIXES[multiple]:
         size /= multiple
         if size &lt; multiple:
-<a>            return '{0:.1f} {1}'.format(size, suffix)                       <span class=u>⑤</span></a>
+<a>            return '{0:.1f} {1}'.format(size, suffix)                       <span class=u>&#x2464;</span></a>
 
     raise ValueError('número muito grande')</code></pre>
 <ol>
-<li><code>'KB'</code>, <code>'MB'</code>, <code>'GB'</code>… essas são para strings
+<li><code>'KB'</code>, <code>'MB'</code>, <code>'GB'</code>&hellip; essas são para strings.
 <li>Funções docstrings são strings. Esta docstring ocupa diversas linhas, por isso usa três aspas consecutivas para começar e terminar a string.
 <li>Estas três aspas consecutivas terminam a docstring.
 <li>Há uma outra string, sendo passado para a exceção como uma mensagem de erro legível.
-<li>Há uma ... que um, o que diabos é isso?
+<li>Há uma &hellip; que um, o que diabos é isso?
 </ol>
 
 <p>Python 3 suporta <dfn>formatação</dfn> de valores em strings. Embora isso possa incluir expressões muito complicadas, o uso mais básico é o de inserir um valor em uma string com um único espaço reservado.
 
 <pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>username = 'mark'</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>password = 'PapayaWhip'</kbd>                             <span class=u>①</span></a>
-<a><samp class=p>>>> </samp><kbd class=pp>"{0}'s password is {1}".format(username, password)</kbd>  <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>password = 'PapayaWhip'</kbd>                             <span class=u>&#x2460;</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>"{0}'s password is {1}".format(username, password)</kbd>  <span class=u>&#x2461;</span></a>
 <samp class=pp>"mark's password is PapayaWhip"</samp></pre>
 <ol>
 <li>Não, minha senha não é realmente <kbd>PapayaWhip</kbd>.
@@ -152,10 +153,10 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 
 <pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>import humansize</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>si_suffixes = humansize.SUFFIXES[1000]</kbd>      <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>si_suffixes = humansize.SUFFIXES[1000]</kbd>      <span class=u>&#x2460;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>si_suffixes</kbd>
 <samp class=pp>['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>'1000{0[0]} = 1{0[1]}'.format(si_suffixes)</kbd>  <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>'1000{0[0]} = 1{0[1]}'.format(si_suffixes)</kbd>  <span class=u>&#x2461;</span></a>
 <samp class=pp>'1000KB = 1MB'</samp>
 </pre>
 <ol>
@@ -259,7 +260,7 @@ periência.</samp>
 <samp class=pp>{'password': 'PapayaWhip', 'user': 'pilgrim', 'database': 'master'}</samp></pre>
 
 <ol>
-<li>O método <code><dfn>split</dfn>()</code> para divisão de uma string tem um argumento obrigatório, o delimitador. O método divide uma string em uma lista de strings com base no delimitador. Aqui, o delimitador é um caractere e comercial(&amp;), mas poderia ser qualquer coisa.
+<li>O método <code><dfn>split</dfn>()</code> para divisão de uma string tem um argumento obrigatório, o delimitador. O método divide uma string em uma lista de strings com base no delimitador. Aqui, o delimitador é um carácter e comercial(&amp;), mas poderia ser qualquer coisa.
 <li>Agora, temos uma lista de strings, cada uma com uma chave, seguida por um sinal de igual, seguido por um valor. Podemos usar um <a href=comprehensions.html#listcomprehension>list comprehensino</a> para iterar a lista inteira e dividir cada string em duas strings com base no primeiro sinal de igual. O segundo argumento opcional do método<code>split()</code>, é o número de vezes que deseja dividir. <code>1</code> significa "dividir apenas uma vez", para o método <code>split()</code> retornará dois itens da lista. (Em teoria, um valor pode conter um sinal de igual também. Se você acabou de usar <code>'key=value=foo'.split('=')</code>, você iria acabar com uma lista de três itens <code>['key', 'value', 'foo']</code>.)
 <li>Finalmente, o Python pode transformar essa lista-de-listas em um dicionário simplesmente passando-a para a função <code>dict()</code>.
 </ol>
@@ -281,7 +282,7 @@ periência.</samp>
 <a><samp class=p>>>> </samp><kbd class=pp>a_string[:19]</kbd>            <span class=u>④</span></a>
 <samp class=pp>'Meu alfabeto comeca'</samp>
 <a><samp class=p>>>> </samp><kbd class=pp>a_string[19:]</kbd>            <span class=u>⑤</span></a>
-<samp class=pp>' aonde o seu alfabeto termina.'</samp></pre>
+<samp class=pp>' onde o seu alfabeto termina.'</samp></pre>
 <ol>
 <li>Você pode obter uma parte de uma string, chamada de "slice", especificando dois índices. O valor de retorno é uma nova string contendo todos os caracteres da string, em ordem, começando com o índice de primeira fatia.
 <li>Como cortar listas, você pode usar índices negativos para cortar strings.
