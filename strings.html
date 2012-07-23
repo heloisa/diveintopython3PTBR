@@ -116,9 +116,9 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 
     Retorna: string
 
-<a>    '''                                                                     <span class=u>③</span></a>
+<a>    '''                                                                     <span class=u>&#x2462;</span></a>
     if size &lt; 0:
-<a>        raise ValueError('o número deve ser positivo')                     <span class=u>④</span></a>
+<a>        raise ValueError('o número deve ser positivo')                     <span class=u>&#x2463;</span></a>
 
     multiple = 1024 if a_kilobyte_is_1024_bytes else 1000
     for suffix in SUFFIXES[multiple]:
@@ -165,14 +165,14 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 </ol>
 
 <aside>{0} é substituído pelo 1º argumento format(). {1} é substituído pelo 2º.</aside>
-<p>O que este exemplo mostra é que <em>especificadores de formato podem acessar itens e propriedades de estruturas de dados usando (quase) sintaxe Python</em>. Isto é chamado de <i>Campos de Nomes Compostos</i>. Os seguintes campos de nomes compostos "apenas funciona"
+<p>O que este exemplo mostra é que <em>especificadores de formato podem acessar itens e propriedades de estruturas de dados usando (quase) sintaxe Python</em>. Isto é chamado de <i>Campo de Nomes Compostos</i>. Os seguintes campos de nomes compostos funcionam assim:
 
 <ul>
 <li>Passando uma lista, e acessar um item da lista pelo índice (como no exemplo anterior)
 <li>Passando um dicionário, e acessar um valor do dicionário através de uma chave
 <li>Passando um módulo, e acessar suas variáveis ​​e funções pelo nome
 <li>Passar uma instância de classe, e acessar suas propriedades e métodos pelo nome
-<li><em>Qualquer combinação dos anteriores</em>
+<li><em>Ou qualquer combinação dos anteriores</em>
 </ul>
 
 <p>Só para explodir sua cabeça, aqui está um exemplo que combina todos os itens acima:
@@ -190,7 +190,7 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 <li><code>sys.modules</code> é um dicionário de todos os módulos que foram importados nesta instância Python. As chaves são os nomes de módulos como strings, os valores são os objetos do módulo em si. Assim, o campo de substituição <code>{0.modules}</code> refere-se ao dicionário de módulos importados.
 <li><code>sys.modules['humansize']</code> é o módulo <code>humansize</code> que você acabou de importar. O campo de substituição <code>{0.modules[humansize]}</code> refere-se ao módulo<code>humansize</code>. Note a pequena diferença de sintaxe aqui. Em um código Python real, as chaves dos dicionários <code>sys.modules</code> são strings, para consultá-las, você precisa colocar aspas em torno do nome do módulo (<i>por exemplo</i> <code> 'humansize '</code>). Mas dentro de um campo de substituição, você ignora as aspas em torno do nome da chave do dicionário (<i>por exemplo</i>, <code>humansize</code>). Para citar <a href=http://www.python.org/dev/peps/pep-3101/>PEP 3101: Formatação Avançada de String</a>, "As regras para analisar um item de chave é muito simples. Se começa com um dígito, em seguida, ele é tratado como um número, caso contrário, é usada como uma string. "
 <li><code>sys.modules['humansize'].SUFFIXES</code> é o dicionário do módulo <code>humansize</code>. O campo de substituição <code>{0.modules [humansize].SUFFIXES}</code> refere-se a esse dicionário.
-<li><code>sys.modules['humansize'].SUFFIXES[1000]</code> é uma lista de sufixos : <code>['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']</code>. Assim o campo de substituição {0.modules[humansize].SUFFIXES[1000]}</code> refere-se a essa lista.
+<li><code>sys.modules['humansize'].SUFFIXES[1000]</code> é uma lista de sufixos : <code>['KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']</code>. Assim o campo de substituição <code>{0.modules[humansize].SUFFIXES[1000]}</code> refere-se a essa lista.
 <li><code>sys.modules['humansize'].SUFFIXES[1000][0]</code> é o primeiro item da lista de sufixos: <code>'KB'</code>. Portanto, o campo substituição total <code>{0.modules [humansize].SUFFIXES[1000][0]}</code> é substituído pela string de dois caracteres <code>KB</code>.
 </ul>
 
@@ -201,13 +201,13 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 <pre class='nd pp'><code>if size &lt; multiple:
     return '{0:.1f} {1}'.format(size, suffix)</code></pre>
 
-<p><code>1{1}</code> é substituído pelo segundo argumento passado para o método <code>format()</code>, que é um <var>sufixo</var>. Mas o que é <code>{0:.1f}</code>? São duas coisas: <code>{0}</code>, que você reconhece, e <code>: .1f</code>, que você não conhece. A segunda metade (incluindo e após os dois pontos) define o <i>formato especifico</code>, que apura como a variável substituída deverá ser formatada.
+<p><code>1{1}</code> é substituído pelo segundo argumento passado para o método <code>format()</code>, que é um <var>sufixo</var>. Mas o que é <code>{0:.1f}</code>? São duas coisas: <code>{0}</code>, que você reconhece, e <code>:.1f</code>, que você não conhece. A segunda metade (incluindo e após os dois pontos) define o <i>formato especifico</i>, que apura como a variável substituída deverá ser formatada.
 
 <blockquote class='note compare clang'>
 <p><span class=u>&#x261E;</span>Especificadores de formato permitem que você mude o texto substituto em uma variedade de maneiras úteis, como a função <code> <dfn>printf </dfn>()</code> em C. Você pode adicionar zero ou espaço de preenchimento, alinhar seqüências de controle, precisão decimal, e até mesmo converter números em hexadecimal.
 </blockquote>
 
-<p>Dentro de um campo de substituição, dois pontos (<code>:</code>) marca o início do especificador de formato. O especificador de formato "<code>.1</code>" significa "volta para o décimo mais próximo" (<i>ou seja</i> exibir apenas um dígito após o ponto decimal). O especificador de formato "<code>f</code>" significa "número de ponto fixo" (em oposição à notação exponencial ou alguma outra representação decimal). Assim, dado um <var>tamanho</var> de <code>698.24</code> e o <var>sufixo</var> <code>'GB'</code>, a string formatada seria <code>'698.2 GB'</code>, porque <code>698.24</code> fica arredondado para uma casa decimal, em seguida, o sufixo é acrescentado após o número.
+<p>Dentro de um campo de substituição, dois pontos (<code>:</code>) marca o início do especificador de formato. O especificador de formato "<code>.1</code>" significa "volta para o décimal mais próximo" (<i>ou seja</i> exibir apenas um dígito após o ponto decimal). O especificador de formato "<code>f</code>" significa "número de ponto fixo" (em oposição à notação exponencial ou alguma outra representação decimal). Assim, dado um <var>tamanho</var> de <code>698.24</code> e o <var>sufixo</var> <code>'GB'</code>, a string formatada seria <code>'698.2 GB'</code>, porque <code>698.24</code> fica arredondado para uma casa decimal, em seguida, o sufixo é acrescentado após o número.
 
 <pre class='nd screen'>
 <samp class=p>>>> </samp><kbd class=pp>'{0:.1f} {1}'.format(698.24, 'GB')</kbd>
@@ -215,47 +215,47 @@ def approximate_size(size, a_kilobyte_is_1024_bytes=True):
 
 <p>Para todos os detalhes sobre especificadores de formato, consulte a especificação do <a href=http://docs.python.org/3.1/library/string.html#format-specification-mini-language>Format Specification Mini-Language</a> na documentação oficial do Python.
 
-<p class=a>⁂
+<p class=a>&#x2042;
 
 <h2 id=common-string-methods>Outros Métodos Comuns de String</h2>
 
 <p>Além de formatação, strings podem fazer uma série de outros truques úteis.
 
 <pre class=screen>
-<a><samp class=p>>>> </samp><kbd>s = '''Arquivos acabados são o resul-</kbd>  <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd>s = '''Arquivos acabados são o resul-</kbd>  <span class=u>&#x2460;</span></a>
 <samp class=p>... </samp><kbd>tado de anos de estudo científi-</kbd>
 <samp class=p>... </samp><kbd>co em conjunto com anos de ex-</kbd>
 <samp class=p>... </samp><kbd>periência.'''</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>s.splitlines()</kbd>                     <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>s.splitlines()</kbd>                     <span class=u>&#x2461;</span></a>
 <samp class=pp>['Arquivos acabados são o resul-',
  'tado de anos de estudo científi-',
  'co em conjunto com anos de ex-',
  'periência.']</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>print(s.lower())</kbd>                   <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>print(s.lower())</kbd>                   <span class=u>&#x2462;</span></a>
 <samp>Arquivos acabados são o resul-
 tado de anos de estudo científi-
 co em conjunto com anos de ex-
 periência.</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>s.lower().count('f')</kbd>               <span class=u>④</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>s.lower().count('f')</kbd>               <span class=u>&#x2463;</span></a>
 <samp class=pp>6</samp></pre>
 <ol>
 <li>Você pode introduzir <dfn>várias linhas</dfn> de strings no shell interativo do Python. Uma vez que você iniciar uma string de várias linhas com aspas triplas, é só apertar <kbd>ENTER</kbd> e o shell interativo irá pedir-lhe para continuar a string. Digitando o fechamento aspas triplas termina a string, e o próximo <kbd>ENTER</kbd> irá executar o comando (neste caso, atribuindo a string para <var>s</var>).
 <li>O método <code><dfn>splitlines</dfn>()</code> pega uma string com várias linhas e retorna uma lista de strings, uma para cada linha do original. Note-se que os retornos do pipe no fim de cada linha não estão incluídos.
-<li>O método <code>lower()<code> converte a string toda em letras minúsculas. (Da mesma forma, o método <code>upper()</upper> converte uma string toda para letras maiúsculas.)
+<li>O método <code>lower()</code> converte a string toda em letras minúsculas. (Da mesma forma, o método <code>upper()</code> converte uma string toda para letras maiúsculas.)
 <li>O método <code>count()</code> conta o número de ocorrências de uma substring. Sim, realmente existem seis "f"s nessa frase!
 </ol>
 
 <p>Aqui está outro caso comum. Vamos dizer que você tem uma lista de pares chave-valor, na forma <code><var>key1</var>=<var>value1</var>&amp;<var>key2</var>=<var>value2</var></code>, e você quer separá-los e fazer um dicionário no formato <code>{key1: value1, key2: value2}</code>.
 
-</p><pre class=screen>
+<pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>query = 'user=pilgrim&amp;database=master&amp;password=PapayaWhip'</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>a_list = query.split('&amp;')</kbd>                                        <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_list = query.split('&amp;')</kbd>                                        <span class=u>&#x2460;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>a_list</kbd>
 <samp class=pp>['user=pilgrim', 'database=master', 'password=PapayaWhip']</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_list_of_lists = [v.split('=', 1) for v in a_list if '=' in v]</kbd>  <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_list_of_lists = [v.split('=', 1) for v in a_list if '=' in v]</kbd>  <span class=u>&#x2461;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>a_list_of_lists</kbd>
 <samp class=pp>[['user', 'pilgrim'], ['database', 'master'], ['password', 'PapayaWhip']]</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_dict = dict(a_list_of_lists)</kbd>                                   <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_dict = dict(a_list_of_lists)</kbd>                                   <span class=u>&#x2462;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>a_dict</kbd>
 <samp class=pp>{'password': 'PapayaWhip', 'user': 'pilgrim', 'database': 'master'}</samp></pre>
 
@@ -266,36 +266,36 @@ periência.</samp>
 </ol>
 
 <blockquote class=note>
-<p><span class=u>☞</span>O exemplo anterior se parece muito com a análise de parâmetros de consulta em uma <abbr>URL</abbr>, mas na vida real a análise <abbr>URL</abbr> é realmente mais complicado do que isso. Se você está lidando com parâmetros <abbr>URL</abbr> de uma query, é melhor você usar a função <a href=http://docs.python.org/3.1/library/urllib.parse.html#urllib.parse.parse_qs><code>urllib.parse.parse_qs()</code></a>, que trata de alguns casos extremos não-óbvios.
+<p><span class=u>&#x261E;</span>O exemplo anterior se parece muito com a análise de parâmetros de consulta em uma <abbr>URL</abbr>, mas na vida real a análise de <abbr>URL</abbr> é realmente mais complicado do que isso. Se você está lidando com parâmetros de uma query <abbr>URL</abbr>, é melhor você usar a função <a href=http://docs.python.org/3.1/library/urllib.parse.html#urllib.parse.parse_qs><code>urllib.parse.parse_qs()</code></a>, que trata de alguns casos extremos e não-óbvios.
 </blockquote>
 
-<h3 id=slicingstrings>Fatias de Um String</h3>
+<h3 id=slicingstrings>Fatias de Uma String</h3>
 <p>Depois de definir uma string, você pode obter qualquer parte dela como uma nova string. Isso é chamado <i>slicing</i>(fatiar) de uma string. Fatiar strings funciona exatamente da mesma forma que <a href=native-datatypes.html#slicinglists>fatiar listas</a>, o que faz sentido, porque strings são apenas seqüências de caracteres.
 <pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>a_string = 'Meu alfabeto comeca aonde o seu alfabeto termina.'</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string[4:12]</kbd>           <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string[4:12]</kbd>           <span class=u>&#x2460;</span></a>
 <samp class=pp>'alfabeto'</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string[4:-4]</kbd>           <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string[4:-4]</kbd>           <span class=u>&#x2461;</span></a>
 <samp class=pp>'alfabeto comeca aonde o seu alfabeto term'</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string[0:3]</kbd>            <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string[0:3]</kbd>            <span class=u>&#x2462;</span></a>
 <samp class=pp>'Meu'</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string[:19]</kbd>            <span class=u>④</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string[:19]</kbd>            <span class=u>&#x2463;</span></a>
 <samp class=pp>'Meu alfabeto comeca'</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string[19:]</kbd>            <span class=u>⑤</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string[19:]</kbd>            <span class=u>&#x2464;</span></a>
 <samp class=pp>' onde o seu alfabeto termina.'</samp></pre>
 <ol>
-<li>Você pode obter uma parte de uma string, chamada de "slice", especificando dois índices. O valor de retorno é uma nova string contendo todos os caracteres da string, em ordem, começando com o índice de primeira fatia.
+<li>Você pode obter uma parte de uma string, chamada de &#8220;slice&#8221;, especificando dois índices. O valor de retorno é uma nova string contendo todos os caracteres da string, em ordem, começando com o índice de primeira fatia.
 <li>Como cortar listas, você pode usar índices negativos para cortar strings.
 <li>Strings são de base zero, assim <code>a_string[0:2]</code> retorna os dois primeiros itens da string, a partir de <code>a_string[0]</code>, até mas não incluindo<code>a_string[2]</code>.
 <li>Se o índice da fatia esquerda é 0, você pode deixá-la fora, o 0(zero) é implícito. Assim <code>a_string[:18]</code> é o mesmo que <code>a_string[0:18]</code>, porque o 0(zero) está implícito.
-<li>Da mesma forma, se o índice da fatia à direita  é o comprimento da string, você pode deixá-lo fora. Assim <code>a_string[18:]</code> é o mesmo que <code>a_string[18:44]</code>, porque a string tem 49 caracteres. Existe uma simetria agradável aqui. Nesta string de 44 caracteres, <code>a_string[:18]</code> retorna os primeiros 18 caracteres, e <code>a_string[18]:</code> retorna tudo menos os primeiros 18 caracteres. Na verdade, <code>a_string[:<var>n</var>]</code> sempre retornará os primeiro <var>n</var> caracteres, e <code>a_string[<var>n</var>:]</code> retorna o resto, independentemente do comprimento da string.
+<li>Da mesma forma, se o índice da fatia à direita  é o comprimento da string, você pode deixá-lo fora. Assim <code>a_string[18:]</code> é o mesmo que <code>a_string[18:44]</code>, porque a string tem 49 caracteres. Existe uma simetria agradável aqui. Nesta string de 44 caracteres, <code>a_string[:18]</code> retorna os primeiros 18 caracteres, e <code>a_string[18:]</code> retorna tudo menos os primeiros 18 caracteres. Na verdade, <code>a_string[:<var>n</var>]</code> sempre retornará os primeiro <var>n</var> caracteres, e <code>a_string[<var>n</var>:]</code> retorna o resto, independentemente do comprimento da string.
 </ol>
 
 <p class=a>&#x2042;
 
 <h2 id=byte-arrays>Strings vs. Bytes</h2>
 
-<p><dfn>Bytes</dfn> são bytes; caracteres são uma abstração. Uma seqüência imutável de caracteres Unicode é chamada de <i>string</i>. Uma seqüência imutável de números entre 0 e 255 é chamado de <i>bytes</i> object.
+<p><dfn>Bytes</dfn> são bytes; caracteres são uma abstração. Uma seqüência imutável de caracteres Unicode é chamada de <i>string</i>. Uma seqüência imutável de números entre 0 e 255 é chamada de <i>byte</i> object.
 
 <pre class=screen>
 <a><samp class=p>>>> </samp><kbd class=pp>by = b'abcd\x65'</kbd>  <span class=u>&#x2460;</span></a>
@@ -317,29 +317,29 @@ periência.</samp>
   File "&lt;stdin>", line 1, in &lt;module>
 TypeError: 'bytes' object does not support item assignment</samp></pre>
 <ol>
-<li>Para definir um <code>bytes</code> object, use o <code>b''</code> com &#8220;<dfn>byte</dfn> literal&#8221;. Cada byte dentro do byte literal pode ser um carácter <abbr>ASCII</abbr> ou um número hexadecimal codificado de <code>\x00</code> a <code>\xff</code> (0–255).
-<li>O tipo de um <code>bytes</code> object é <code>bytes</code>.
+<li>Para definir um <code>bytes</code> object, use o <code>b''</code> com &#8220;<dfn>byte</dfn> literal&#8221;. Cada byte dentro do byte literal pode ser um carácter <abbr>ASCII</abbr> ou um número hexadecimal codificado de <code>\x00</code> a <code>\xff</code> (0&ndash;255).
+<li>O tipo de um <code>bytes</code> object são <code>bytes</code>.
 <li>Assim como listas e strings, você pode obter o comprimento de alguns <code>bytes</code> object com a função built-in <code>len()</code>.
 <li>Assim como listas e strings, você pode usar o operador <code>+</code> para concatenar <code>bytes</code> objects. O resultado é um novo <code>bytes</code> object.
-<li>Concatenação de um <code>bytes; object de 5 bytes e um de 1 byte dá-lhe um <code>bytes</code> object de 6 bytes.
+<li>Concatenação de um <code>bytes</code> object de 5 bytes e um de 1 byte dá-lhe um <code>bytes</code> object de 6 bytes.
 <li>Assim como listas e strings, você pode usar a notação de índice para obter bytes individuais de alguns  <code>bytes</code> object. Os itens de uma string são strings; os itens de um <code>bytes</code> object são inteiros. Especificamente, inteiros entre 0-255.
-<li>Um <code>bytes</code> object é imutável, não se pode atribuir bytes individuais. Se você precisa mudar bytes individuais, você pode usar o <a href=#slicingstrings>fatiamento de strings</>t; e operadores de concatenação (que funcionam da mesma forma como strings), ou você pode converter os <code>bytes</code> object em um <code>bytearray</code> object.
+<li>Um <code>bytes</code> object é imutável, não se pode atribuir bytes individuais a ele. Se você precisa mudar bytes individuais, você pode usar o <a href=#slicingstrings>fatiamento de strings</a> e operadores de concatenação (que funcionam da mesma forma como strings), ou você pode converter os <code>bytes</code> object em um <code>bytearray</code> object.
 </ol>
 
 <pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>by = b'abcd\x65'</kbd>
-<a><samp class=p>>>> </samp><kbd class=pp>barr = bytearray(by)</kbd>  <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>barr = bytearray(by)</kbd>  <span class=u>&#x2460;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>barr</kbd>
 <samp class=pp>bytearray(b'abcde')</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>len(barr)</kbd>             <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>len(barr)</kbd>             <span class=u>&#x2461;</span></a>
 <samp class=pp>5</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>barr[0] = 102</kbd>         <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>barr[0] = 102</kbd>         <span class=u>&#x2462;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>barr</kbd>
 <samp class=pp>bytearray(b'fbcde')</samp></pre>
 <ol>
 <li>Para converter um <code>bytes</code> object em um <code>bytearray</code> object mutável, use a função built-in <code>bytearray()</code>.
 <li>Todos os métodos e as operações que você pode fazer em um <code>bytes</code> object, você pode fazer em um <code>bytearray</code> object também.
-<li>A única diferença é que, com o <code>bytearray</code> object, você pode atribuir bytes individuais usando a notação de índice. O valor atribuído deve ser um inteiro entre 0-255.
+<li>A única diferença é que, com o <code>bytearray</code> object, você pode atribuir bytes individuais usando a notação de índice. O valor atribuído deve ser um inteiro entre 0&ndash;255.
 </ol>
 
 <p>A única coisa que você <em>nunca pode fazer</em> é misturar bytes e strings.
@@ -359,52 +359,52 @@ TypeError: Can't convert 'bytes' object to str implicitly</samp>
 <samp class=pp>1</samp></pre>
 <ol>
 <li>Você não pode concatenar bytes e strings. Eles são dois tipos diferentes de dados.
-<li>Você não pode contar as ocorrências de bytes em uma string, porque não há bytes em uma string. Uma string é uma sequência de caracteres. Talvez você quis dizer "contar as ocorrências da string que você obteria depois de decodificação dessa seqüência de bytes em uma codificação de caracteres particular"? Bem, então você precisa dizer isso explicitamente. Python 3 não <dfn>implicitamente</dfn> converte bytes em strings ou strings em bytes.
-<li>Por uma incrível coincidência, esta linha de código diz "contar as ocorrências da string que você obteria depois de decodificação essa seqüência de bytes nesta codificação de caracteres em particular."
+<li>Você não pode contar as ocorrências de bytes em uma string, porque não há bytes em uma string. Uma string é uma sequência de caracteres. Talvez você quis dizer "contar as ocorrências da string que você obteria depois de decodificação dessa seqüência de bytes em uma codificação de caracteres particular"? Bem, então você precisa dizer isso explicitamente. Em Python 3 não converte <dfn>implicitamente</dfn> bytes em strings ou strings em bytes.
+<li>Por uma incrível coinscidência, esta linha de código diz "contar as ocorrências da string que você obteria depois de decodificação dessa seqüência de bytes nesta codificação de caracteres em particular."
 </ol>
 
-<p>E aqui está o link entre strings e bytes: <code>bytes</code> objects têm um método <code><dfn>decodec</dfn>() </code>  que utiliza uma codificação de caracteres e retorna uma string, a strings tem um método <code><dfn>encode</dfn>()</code> que utiliza uma codificação de caracteres e retorna um <code>bytes</code> object. No exemplo anterior, a descodificação foi relativamente simples&nbsp;&mdash;&nbsp;a conversão de uma seqüência de bytes em uma seqüência de caracteres na codificação <abbr>ASCII</abbr>. Mas o mesmo processo funciona com qualquer codificação que suporta os caracteres da string&nbsp;&mdash;&nbsp;codificações mesmo legado (não-Unicode).
+<p>E aqui está o link entre strings e bytes: <code>bytes</code> objects têm um método <code><dfn>decode</dfn>()</code>  que utiliza uma codificação de caracteres e retorna uma string, e strings tem um método <code><dfn>encode</dfn>()</code> que utiliza uma codificação de caracteres e retorna um <code>bytes</code> object. No exemplo anterior, a descodificação foi relativamente simples&nbsp;&mdash;&nbsp;a conversão de uma seqüência de bytes em uma seqüência de caracteres na codificação <abbr>ASCII</abbr>. Mas o mesmo processo funciona com qualquer codificação que suporta os caracteres da string&nbsp;&mdash;&nbsp; sempre que na mesma codificação legada (não-Unicode).
 
 <pre class=screen>
-<a><samp class=p>>>> </samp><kbd class=pp>a_string = '深入 Python'</kbd>         <span class=u>①</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>a_string = '深入 Python'</kbd>         <span class=u>&#x2460;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>len(a_string)</kbd>
 <samp class=pp>9</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('utf-8')</kbd>    <span class=u>②</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('utf-8')</kbd>    <span class=u>&#x2461;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>by</kbd>
 <samp class=pp>b'\xe6\xb7\xb1\xe5\x85\xa5 Python'</samp>
 <samp class=p>>>> </samp><kbd class=pp>len(by)</kbd>
 <samp class=pp>13</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('gb18030')</kbd>  <span class=u>③</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('gb18030')</kbd>  <span class=u>&#x2462;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>by</kbd>
 <samp class=pp>b'\xc9\xee\xc8\xeb Python'</samp>
 <samp class=p>>>> </samp><kbd class=pp>len(by)</kbd>
 <samp class=pp>11</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('big5')</kbd>     <span class=u>④</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>by = a_string.encode('big5')</kbd>     <span class=u>&#x2463;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>by</kbd>
 <samp class=pp>b'\xb2`\xa4J Python'</samp>
 <samp class=p>>>> </samp><kbd class=pp>len(by)</kbd>
 <samp class=pp>11</samp>
-<a><samp class=p>>>> </samp><kbd class=pp>roundtrip = by.decode('big5')</kbd>    <span class=u>⑤</span></a>
+<a><samp class=p>>>> </samp><kbd class=pp>roundtrip = by.decode('big5')</kbd>    <span class=u>&#x2464;</span></a>
 <samp class=p>>>> </samp><kbd class=pp>roundtrip</kbd>
 <samp class=pp>'深入 Python'</samp>
 <samp class=p>>>> </samp><kbd class=pp>a_string == roundtrip</kbd>
 <samp class=pp>True</samp></pre>
 <ol>
 <li>Essa é uma string. Ele tem nove caracteres.
-<li>Este é um <code>bytes</code> object. Tem 13 bytes É a seqüência de bytes que você começa quando você toma uma <var>a_string</var> e codificá-la em <abbr>UTF-8 </abbr>.
-<li>Este é um <code>bytes</code> object. Tem 11 bytes. É a seqüência de bytes que você começa quando você toma uma <var> a_string</var> e codificá-la em <a href=http://en.wikipedia.org/wiki/GB_18030>GB18030</a>.
-<li>Este é um <code>bytes</code> object. Tem 11 bytes. É uma <em>seqüência totalmente diferente de bytes</em> que você começa quando você pega <var>a_string</var> e codifica em <a href=http://en.wikipedia.org/wiki/Big5>Big5</a>.
-<li>Essa é uma string. Ele tem nove caracteres. É uma seqüência de caracters que começa quando você a decodifica usando o algoritmo Big5 de codificação.  Ele é idêntico à string original.
+<li>Este é um <code>bytes</code> object. Tem 13 bytes. É a seqüência de bytes que você obtem quando você codifica uma <var>a_string</var> em <abbr>UTF-8 </abbr>.
+<li>Este é um <code>bytes</code> object. Tem 11 bytes. É a seqüência de bytes que você obtem quando você codifica uma <var> a_string</var> em <a href=http://en.wikipedia.org/wiki/GB_18030>GB18030</a>.
+<li>Este é um <code>bytes</code> object. Tem 11 bytes. É uma <em>seqüência totalmente diferente de bytes</em> que você obtem quando você pega uma <var>a_string</var> e codifica em <a href=http://en.wikipedia.org/wiki/Big5>Big5</a>.
+<li>Essa é uma string. Ele tem nove caracteres. É uma seqüência de caracters que obtem quando você a decodifica usando o algoritmo Big5 de codificação.  Ela é idêntica à string original.
 </ol>
 
 <p class=a>&#x2042;
 
 <h2 id=py-encoding>Postscript: Codificação de Caracteres do código fonte Python</h2>
 
-<p>Python 3 assume que seu código-fonte&nbsp;&mdash;&nbsp;<i>ou seja</i> para cada arquivo <code>.py</code> -. Está codificado em <abbr>UTF-8</abbr>.
+<p>Python 3 assume que seu código-fonte&nbsp;&mdash;&nbsp;<i>ou seja</i> para cada arquivo <code>.py</code> &nbsp;&mdash;&nbsp; esta codificado em <abbr>UTF-8</abbr>.
 
 <blockquote class='note compare python2'>
-<p><span class=u>&#x261E;</span>Em Python 2, a codificação <dfn>padrão</dfn>para os arquivos <code>. py</code> foi <abbr>ASCII</abbr>. Em Python 3, <a href=http://www.python.org/dev/peps/pep-3120/>a codificação padrão é <abbr>UTF-8</abbr></a>.
+<p><span class=u>&#x261E;</span>Em Python 2, a codificação <dfn>padrão</dfn> para os arquivos <code>.py</code> foi <abbr>ASCII</abbr>. Em Python 3, <a href=http://www.python.org/dev/peps/pep-3120/>a codificação padrão é <abbr>UTF-8</abbr></a>.
 </blockquote>
 
 <p>Se você gostaria de usar uma codificação diferente dentro de seu código Python, você pode colocar uma declaração de codificação na primeira linha de cada arquivo. Esta declaração define um arquivo <code>.py</code> a ser windows-1252:
@@ -427,7 +427,7 @@ TypeError: Can't convert 'bytes' object to str implicitly</samp>
 <ul>
 <li><a href=http://docs.python.org/3.1/howto/unicode.html>Python Unicode HOWTO</a>
 <li><a href=http://docs.python.org/3.0/whatsnew/3.0.html#text-vs-data-instead-of-unicode-vs-8-bit>What’s New In Python 3: Text vs. Data Instead Of Unicode vs. 8-bit</a>
-<li><a href=http://www.python.org/dev/peps/pep-0261/><abbr>PEP 261</abbr></a> explica como o Python lida com caracteres astrais fora do Plano Multilingual Básico (caracteres ou seja, cujo ordinal valor é maior do que 65535)
+<li><a href=http://www.python.org/dev/peps/pep-0261/><abbr>PEP 261</abbr></a> explica como o Python lida com caracteres astrais fora do Plano Multilingual Básico (ou seja, caracterescujo valor ordinal é maior do que 65535)
 </ul>
 
 <p>Unicode em geral:
@@ -455,7 +455,7 @@ TypeError: Can't convert 'bytes' object to str implicitly</samp>
 <li><a href=http://www.python.org/dev/peps/pep-3101/><abbr>PEP</abbr> 3101: Advanced String Formatting</a>
 </ul>
 
-<p class=v><a href=comprehensions.html rel=prev title="back to “Comprehensions”"><span class=u>☜</span></a> <a href=regular-expressions.html rel=next title="onward to “Regular Expressions”"><span class=u>☞</span></a>
+<p class=v><a href=comprehensions.html rel=prev title='back to &#8220;Comprehensions&#8221;'><span class=u>&#x261C;</span></a> <a href=regular-expressions.html rel=next title='onward to &#8220;Regular Expressions&#8221;'><span class=u>&#x261E;</span></a>
 
 <p class=c>&copy; 2001&ndash;11 <a href=about.html>Mark Pilgrim</a>
 <script src=j/jquery.js></script>
