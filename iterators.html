@@ -14,17 +14,17 @@ body{counter-reset:h1 7}
 <p id=level>Difficulty level: <span class=u title=intermediate>&#x2666;&#x2666;&#x2666;&#x2662;&#x2662;</span>
 <h1>Classes <i class=baa>&amp;</i> Iterators</h1>
 <blockquote class=q>
-<p><span class=u>&#x275D;</span> East is East, and West is West, and never the twain shall meet. <span class=u>&#x275E;</span><br>&mdash; <a href=http://en.wikiquote.org/wiki/Rudyard_Kipling>Rudyard Kipling</a>
+<p><span class=u>&#x275D;</span> Leste é leste, oeste é oeste, e os dois nunca se encontraram.<span class=u>&#x275E;</span><br>&mdash; <a href=http://en.wikiquote.org/wiki/Rudyard_Kipling>Rudyard Kipling</a>
 </blockquote>
 <p id=toc>&nbsp;
-<h2 id=divingin>Diving In</h2>
-<p class=f>Iterators are the &#8220;secret sauce&#8221; of Python 3. They&#8217;re everywhere, underlying everything, always just out of sight. <a href=comprehensions.html>Comprehensions</a> are just a simple form of <i>iterators</i>. Generators are just a simple form of <i>iterators</i>. A function that <code>yield</code>s values is a nice, compact way of building an iterator without building an iterator. Let me show you what I mean by that.
+<h2 id=divingin>Mergulhando em</h2>
+<p class=f>Iterators são o &#8220;tempero secreto&#8221; do Python 3. Eles estão em todo lugar, contidos em todo lugar, sempre fora de vista. <a href=comprehensions.html>Comprehensions</a> são apenas uma forma dos <i>iterators</i>. Generators são apenas uma foram simples do <i>iterators</i>. A função que produz valores é agradável quando numa forma compacta utilizando iterators sem a construção de iterators. Deixe-me mostrar o que eu quiz dizer com isto.
 
-<p>Remember <a href=generators.html#a-fibonacci-generator>the Fibonacci generator</a>? Here it is as a built-from-scratch iterator:
+<p>Lembra-se do <a href=generators.html#a-fibonacci-generator>generator de Fibonacci</a>? Há aqui um iterator implícito a partir do zero:
 
 <p class=d>[<a href=examples/fibonacci2.py>download <code>fibonacci2.py</code></a>]
 <pre class=pp><code>class Fib:
-    '''iterator that yields numbers in the Fibonacci sequence'''
+    '''iterator que produz números da sequência de Fibonacci'''
 
     def __init__(self, max):
         self.max = max
@@ -41,57 +41,57 @@ body{counter-reset:h1 7}
         self.a, self.b = self.b, self.a + self.b
         return fib</code></pre>
 
-<p>Let&#8217;s take that one line at a time.
+<p>Deixe-me mostrar linha por linha.
 
 <pre class='nd pp'><code>class Fib:</code></pre>
 
-<p><code>class</code>? What&#8217;s a class?
+<p><code>class</code>? O que é uma classe?
 
 <p class=a>&#x2042;
 
-<h2 id=defining-classes>Defining Classes</h2>
+<h2 id=defining-classes>Definindo Classes</h2>
 
-<p>Python is fully object-oriented: you can define your own classes, inherit from your own or built-in classes, and instantiate the classes you&#8217;ve defined.
+<p>Python totalmente orientado a objetos: você pode definir sua própria classe, herdar de si mesmo ou de suas classes built-in, e instanciar suas classes que você definiu.
 
-<p>Defining a class in Python is simple. As with functions, there is no separate interface definition. Just define the class and start coding. A Python class starts with the reserved word <code>class</code>, followed by the class name. Technically, that&#8217;s all that&#8217;s required, since a class doesn&#8217;t need to inherit from any other class.
+<p>Definir uma classe em Python é simples. Tal como acontece com as funções, não há nenhuma definição separada da interface. Apenas definir a classe e começar a codificar. Uma classe Python começa com a palavra reservada <code>class</code>, seguida do nome da classe. Tecnicamente, isto é tudo que é necessário, uma vez que não é preciso herdar de qualquer outra classe.
 
 <pre class=pp><code><a>class PapayaWhip:  <span class=u>&#x2460;</span></a>
 <a>    pass           <span class=u>&#x2461;</span></a></code></pre>
 <ol>
-<li>The name of this class is <code>PapayaWhip</code>, and it doesn&#8217;t inherit from any other class. Class names are usually capitalized, <code>EachWordLikeThis</code>, but this is only a convention, not a requirement.
-<li>You probably guessed this, but everything in a class is indented, just like the code within a function, <code>if</code> statement, <code>for</code> loop, or any other block of code. The first line not indented is outside the class.
+<li>O nome da classe é <code>PapayaWhip</code>, e não é herdada de nenhuma outra classe. Nomes de classe normalmente são maiusculas, <code>CadaPalavraDessaManeira</code>, mas isto é um convenção, e não um requisito.
+<li>Você provavelmente esta se perguntando sobre isto, mas tudo na classe é identado, como no código de funções, condicional <code>if</code>, laço <code>for</code>, ou qualquer outro bloco de código. A primeira linha não identada já será considerada fora da classe.
 </ol>
 
-<p>This <code>PapayaWhip</code> class doesn&#8217;t define any methods or attributes, but syntactically, there needs to be something in the definition, thus the <code>pass</code> statement. This is a Python reserved word that just means &#8220;move along, nothing to see here&#8221;. It&#8217;s a statement that does nothing, and it&#8217;s a good placeholder when you&#8217;re stubbing out functions or classes.
+<p>Esta classe <code>PapayaWhip</code> não define métodos ou atributos, mas sintaticamente, é necessário que haja algo na definição, assim há a declaração <code>pass</code>. Esta é uma palavra reservada do Python que significa apenas "Passe adiante, nada para fazer aqui". É uma declaração que não faz nada, é bom quando você está apagando funções ou classes.
 
 <blockquote class='note compare java'>
-<p><span class=u>&#x261E;</span>The <code>pass</code> statement in Python is like a empty set of curly braces (<code>{}</code>) in Java or C.
+<p><span class=u>&#x261E;</span>O argumento <code>pass</code> em Python é como chaves vazias(<code>{}</code>) em Java ou C.
 </blockquote>
 
-<p>Many classes are inherited from other classes, but this one is not. Many classes define methods, but this one does not. There is nothing that a Python class absolutely must have, other than a name. In particular, C++ programmers may find it odd that Python classes don&#8217;t have explicit constructors and destructors. Although it&#8217;s not required, Python classes <em>can</em> have something similar to a constructor: the <code>__init__()</code> method.
+<p>Muitas classes são herdadas de outras classes, mas esta não. Muitas classes definem métodos, mas esta não o faz. Não há nada que uma classe Python deva ter, além do nome. Em particular, programadores de C++ podem achar que seja esquisito não ter explicitamente construtores e destrutores. Embora não seja necessário, classes Python <em>podem</em> ter algo semelhante a um construtor: o método <code>__init__()</code>.
 
-<h3 id=init-method>The <code>__init__()</code> Method</h3>
+<h3 id=init-method>O Método <code>__init__()</code></h3>
 
-<p>This example shows the initialization of the <code>Fib</code> class using the <code>__init__</code> method.
+<p>Este exemplo mostra a inicialização da classe <code>Fib</code> usando o método <code>__init__</code>.
 
 <pre class=pp><code>class Fib:
-<a>    '''iterator that yields numbers in the Fibonacci sequence'''  <span class=u>&#x2460;</span></a>
+<a>    '''iterator que produz números da sequência de Fibonacci'''  <span class=u>&#x2460;</span></a>
 
 <a>    def __init__(self, max):                                      <span class=u>&#x2461;</span></a></code></pre>
 <ol>
-<li>Classes can (and should) have <code>docstring</code>s too, just like modules and functions.
-<li>The <code>__init__()</code> method is called immediately after an instance of the class is created. It would be tempting&nbsp;&mdash;&nbsp;but technically incorrect&nbsp;&mdash;&nbsp;to call this the &#8220;constructor&#8221; of the class. It&#8217;s tempting, because it looks like a C++ constructor (by convention, the <code>__init__()</code> method is the first method defined for the class), acts like one (it&#8217;s the first piece of code executed in a newly created instance of the class), and even sounds like one. Incorrect, because the object has already been constructed by the time the <code>__init__()</code> method is called, and you already have a valid reference to the new instance of the class.
+<li>Classes podem (e devem) ter <code>docstring</code> também, assim como módulos e funções.
+<li>O método <code>__init__()</code> é chamado imediatamente após uma instância da classe ser criada. Seria tentador&nbsp;&mdash;&nbsp;mas tecnicamente incorreto&nbsp;&mdash;&nbsp;chamá-lo de &#8220;construtor&#8221; da classe. É tentador, porque se parece com um construtor C++(pela convenção, o método <code>__init__()</code> é o primeiro a ser definido na classe), age como um(é o primeiro pedaço de código a ser executado quando uma nova instância da classe é criada), e ainda se parece com um. Incorreto, porque o objeto já foi construído quando o método <code>__init__()</code> fora chamado, e você já tem uma instância valida para a nova classe.
 </ol>
 
-<p>The first argument of every class method, including the <code>__init__()</code> method, is always a reference to the current instance of the class. By convention, this argument is named <var>self</var>. This argument fills the role of the reserved word <code>this</code> in <abbr>C++</abbr> or Java, but <var>self</var> is not a reserved word in Python, merely a naming convention. Nonetheless, please don&#8217;t call it anything but <var>self</var>; this is a very strong convention.
+<p>O primeiro argumento de todos métodos da classe, incluindo o método <code>__init__()</code>, é sempre a referência a instância da classe atual. Por convenção este argumento é chamado <var>self</var>. Este argumento faz o papel da palavra reservada <code>this</code> em <abbr>C++</abbr> ou Java, mas <var>self</var> não é uma palavra reservada em Python, meramente uma convenção de nomeclatura. No entanto, por favor, não chame nenhuma outra coisa de <var>self</var>, isto é fortemente recomendado.
 
-<p>In all class methods, <var>self</var> refers to the instance whose method was called. But in the specific case of the <code>__init__()</code> method, the instance whose method was called is also the newly created object. Although you need to specify <var>self</var> explicitly when defining the method, you do <em>not</em> specify it when calling the method; Python will add it for you automatically.
+<p>Em todos os métodos das classes, <var>self</var> se refere a instância da classe a qual ela foi chamada. Mas no caso específico do método <code>__init__()</code>, a instância cujo método foi chamado é também o objeto recém-criado. Embora você tenha que declarar explicitamente o </var> quando define o método, você <em>não</em> precisa especificá-lo ao chamar o método; o Python irá adicioná-lo automaticamente pra você.
 
 <p class=a>&#x2042;
 
-<h2 id=instantiating-classes>Instantiating Classes</h2>
+<h2 id=instantiating-classes>Instânciando Classes</h2>
 
-<p>Instantiating classes in Python is straightforward. To instantiate a class, simply call the class as if it were a function, passing the arguments that the <code>__init__()</code> method requires. The return value will be the newly created object.
+<p>Instanciar classes em Python é simples. Para instânciar uma classe, simplesmente é chamar a classe como se fosse uma função, passando os argumentos que são necessários pelo método <code>__init__()</code>. O valor de retorno será o novo objeto recém criado.
 <pre class=screen>
 <samp class=p>>>> </samp><kbd class=pp>import fibonacci2</kbd>
 <a><samp class=p>>>> </samp><kbd class=pp>fib = fibonacci2.Fib(100)</kbd>  <span class=u>&#x2460;</span></a>
@@ -100,29 +100,29 @@ body{counter-reset:h1 7}
 <a><samp class=p>>>> </samp><kbd class=pp>fib.__class__</kbd>              <span class=u>&#x2462;</span></a>
 <samp class=pp>&lt;class 'fibonacci2.Fib'></samp>
 <a><samp class=p>>>> </samp><kbd class=pp>fib.__doc__</kbd>                <span class=u>&#x2463;</span></a>
-<samp class=pp>'iterator that yields numbers in the Fibonacci sequence'</samp></pre>
+<samp class=pp>'iterator que produz números da sequência de Fibonacci'</samp></pre>
 <ol>
-<li>You are creating an instance of the <code>Fib</code> class (defined in the <code>fibonacci2</code> module) and assigning the newly created instance to the variable <var>fib</var>. You are passing one parameter, <code>100</code>, which will end up as the <var>max</var> argument in <code>Fib</code>&#8217;s <code>__init__()</code> method.
-<li><var>fib</var> is now an instance of the <code>Fib</code> class.
-<li>Every class instance has a built-in attribute, <code>__class__</code>, which is the object&#8217;s class. Java programmers may be familiar with the <code>Class</code> class, which contains methods like <code>getName()</code> and <code>getSuperclass()</code> to get metadata information about an object. In Python, this kind of metadata is available through attributes, but the idea is the same.
-<li>You can access the instance&#8217;s <code>docstring</code> just as with a function or a module. All instances of a class share the same <code>docstring</code>.
+<li>Você está criando uma instância da classe <code>Fib</code>(definido no módulo <code>fibonacci2</code>) e atribuindo a nova instância a variável <var>fib</var>. Você está passando um parâmetro, <code>100</code>, que acabará como o argumento <var>max</var> no método <code>__init__()</code> da classe <code>Fib</code>.
+<li><var>fib</var> é agora uma instância da classe <code>Fib</code>.
+<li>Toda instância de classe tem um atríbuto built-in, <code>__class__</code>, que é a classe do objeto. Programadores de Java podem achar semelhante a classe <code>Class</code>, que contém métodos como <code>getName()</code> e <code>getSuperclass()</code> para obter informações sobre o objeto. Em Python, estes dados estão disponíveis através de atributos, mas a ideia é a mesma.
+<li>Você pode acessar o <code>docstring</code> da instância assim como uma função ou módulo. Todas as instâncias da classe compartilham o mesmo <code>docstring</code>.
 </ol>
 
 <blockquote class='note compare java'>
-<p><span class=u>&#x261E;</span>In Python, simply call a class as if it were a function to create a new instance of the class. There is no explicit <code>new</code> operator like there is in <abbr>C++</abbr> or Java.
+<p><span class=u>&#x261E;</span>Em Python, basta chamar uma classe como se fosse uma função para criar uma nova instância da classe. Não há nenhum novo operador explícito como há em <abbr>C++</abbr> ou Java.
 </blockquote>
 
 <p class=a>&#x2042;
 
-<h2 id=instance-variables>Instance Variables</h2>
+<h2 id=instance-variables>Variáveis de Instância</h2>
 
-<p>On to the next line:
+<p>Na próxima linha:
 
 <pre class=pp><code>class Fib:
     def __init__(self, max):
 <a>        self.max = max        <span class=u>&#x2460;</span></a></code></pre>
 <ol>
-<li>What is <var>self.max</var>? It&#8217;s an instance variable. It is completely separate from <var>max</var>, which was passed into the <code>__init__()</code> method as an argument. <var>self.max</var> is &#8220;global&#8221; to the instance. That means that you can access it from other methods.
+<li>O que é <var>self.max</var>? É uma variável da instância. Este é completamento separado do <var>max</var>, o qual foi passado ao método <code>__init__()</code> como argumento. <var>self.max</var> é "global" na instância. Que significa que você pode acessá-la através de outros métodos.
 </ol>
 
 <pre class=pp><code>class Fib:
@@ -135,11 +135,11 @@ body{counter-reset:h1 7}
         fib = self.a
 <a>        if fib > self.max:    <span class=u>&#x2461;</span></a></code></pre>
 <ol>
-<li><var>self.max</var> is defined in the <code>__init__()</code> method&hellip;
-<li>&hellip;and referenced in the <code>__next__()</code> method.
+<li><var>self.max</var> é definido no método <code>__init__()</code>&hellip;
+<li>&hellip;e referênciado no método <code>__next__()</code>.
 </ol>
 
-<p>Instance variables are specific to one instance of a class. For example, if you create two <code>Fib</code> instances with different maximum values, they will each remember their own values.
+<p>Variáveis de instância são específicas a uma instância da classe. Por exemplo, se você criar duas instâncias de <code>Fib</code> com diferentes valores máximos, cada uma irá lembrar de seus próprios valores.
 
 <pre class='nd screen'>
 <samp class=p>>>> </samp><kbd class=pp>import fibonacci2</kbd>
@@ -152,12 +152,12 @@ body{counter-reset:h1 7}
 
 <p class=a>&#x2042;
 
-<h2 id=a-fibonacci-iterator>A Fibonacci Iterator</h2>
+<h2 id=a-fibonacci-iterator>Um Iterator Fibonacci</h2>
 
-<p><em>Now</em> you&#8217;re ready to learn how to build an iterator. An iterator is just a class that defines an <code>__iter__()</code> method.
+<p><em>Agora</em> você está pronto para aprender como construir um iterator. Um iterator é apenas uma classe que define o método <code>__iter__()</code>.
 
 <aside class=ots>
-All three of these class methods, <code>__init__</code>, <code>__iter__</code>, and <code>__next__</code>, begin and end with a pair of underscore (<code>_</code>) characters. Why is that? There&#8217;s nothing magical about it, but it usually indicates that these are &#8220;<dfn>special methods</dfn>.&#8221; The only thing &#8220;special&#8221; about special methods is that they aren&#8217;t called directly; Python calls them when you use some other syntax on the class or an instance of the class. <a href=special-method-names.html>More about special methods</a>.
+Todos os três métodos da classe, <code>__init__</code>, <code>__iter__</code>, e <code>__next__</code>, começam e terminam com um par de caracteres underscore (<code>_</code>). Por que isto? Não há nada mágico sobre isto, mas geralmente indica que estes são "métodos especiais". A única coisa "especial" nestes métodos é que não são chamados diretamente. Python os chama quando você usa uma sintaxe da classe ou instância da classe. <a href=special-method-names.html>Mais sobre métodos especiais</a>.
 </aside>
 
 <p class=d>[<a href=examples/fibonacci2.py>download <code>fibonacci2.py</code></a>]
