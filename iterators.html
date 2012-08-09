@@ -182,10 +182,10 @@ Todos os três métodos da classe, <code>__init__</code>, <code>__iter__</code>,
 <li>O método <code>__iter__()</code> é chamado sempre que chamam <code>iter(fib)</code>. (Como você verá em um minuto, o loop <code>for</code> irá chamá-lo automaticamente, mas você pode acessá-lo manualmente). Após o inicializar  a iteração( neste caso, redefinindo <code>self.a</code> e <code>self.b</code>, nossos dois contadores), o método <code>__iter__()</code> pode retornar qualquer objeto que implementa o método <code>__next__()</code>. Neste caso(e na maioria deles), <code>__iter__()</code> simplesmente retorna <var>self</var>, uma vez que esta classe implemente seu próprio método<code>__next__()</code>.
 <li>O método <code>__next__()</code> é chamado sempre que alguém chama <code>next()</code> em um iterator de uma instância da classe. Isto fará sentido em um minuto.
 <li>Quando o método <code>__next__()</code> gera um exceção <code>StopIteration</code>, isto sinaliza para quem o chama que a iteração chegou ao fim. Ao contrário da maioria das exceçoes, esta não é um erro; é uma condição normal que significa que não mais valores a serem gerados. Se quem o chama é um loop <code>for</code>, este vai notar a exceção <code>StopIteration</code> e sairá amigavelmente do loop. (Em outras palavras, ele vai absorver a exceção). Este é um toque de mágica usado de chave para o uso do iterator em loops <code>for</code>.
-<li>To spit out the next value, an iterator&#8217;s <code>__next__()</code> method simply <code>return</code>s the value. Do not use <code>yield</code> here; that&#8217;s a bit of syntactic sugar that only applies when you&#8217;re using generators. Here you&#8217;re creating your own iterator from scratch; use <code>return</code> instead.
+<li>Para guspir o próximo valor, o método <code>__next__()</code> simplesmente retorna este valor. Não use-o aqui, este é apenas uma pitada quando está usando generators. Aqui você esta criando iterators do use, então use <code>return</code> invés.
 </ol>
 
-<p>Thoroughly confused yet? Excellent. Let&#8217;s see how to call this iterator:
+<p>Completamente confuso agora? Excelente. Vamos ver como chamar este iterator:
 
 <pre class='nd screen'>
 <samp class=p>>>> </samp><kbd class=pp>from fibonacci2 import Fib</kbd>
