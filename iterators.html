@@ -20,7 +20,7 @@ body{counter-reset:h1 7}
 <h2 id=divingin>Mergulhando em</h2>
 <p class=f>Iterators são o &#8220;tempero secreto&#8221; do Python 3. Eles estão em todo lugar, contidos em todo lugar, sempre fora de vista. <a href=comprehensions.html>Comprehensions</a> são apenas uma forma dos <i>iterators</i>. Generators são apenas uma foram simples do <i>iterators</i>. A função que produz valores é agradável quando numa forma compacta utilizando iterators sem a construção de iterators. Deixe-me mostrar o que eu quiz dizer com isto.
 
-<p>Lembra-se do <a href=generators.html#a-fibonacci-generator>generator de Fibonacci</a>? Há aqui um iterator implícito a partir do zero:
+<p>Lembra-se do <a href=generators.html#a-fibonacci-generator>gerador de Fibonacci</a>? Há aqui um iterator implícito a partir do zero:
 
 <p class=d>[<a href=examples/fibonacci2.py>download <code>fibonacci2.py</code></a>]
 <pre class=pp><code>class Fib:
@@ -363,22 +363,22 @@ rules = LazyRules()</code></pre>
 <li>Este processo de leitura-processamento-e-cache vai continuar ao longo da leitura das <var>rules</var> do arquivo até encontrar uma que seja a procurada. Se não for encontrado e o fim do arquivo chegar, este continuará aberto para o próximo comando <code>readline()</code> seja invocado. Enquanto isso, o cache agora tem mais itens nele, e se começarmos novamente a tentar encontrar uma nova palavra, primeiro serão testadas com as em cache para depois tentar uma re-leitura do arquivo.
 </ul>
 
-<p>We have achieved pluralization nirvana.
+<p>Vamos popularizar o nirvana
 
 <ol>
-<li><strong>Minimal startup cost.</strong> The only thing that happens on <code>import</code> is instantiating a single class and opening a file (but not reading from it).
-<li><strong>Maximum performance.</strong> The previous example would read through the file and build functions dynamically every time you wanted to pluralize a word. This version will cache functions as soon as they&#8217;re built, and in the worst case, it will only read through the pattern file once, no matter how many words you pluralize.
-<li><strong>Separation of code and data.</strong> All the patterns are stored in a separate file. Code is code, and data is data, and never the twain shall meet.
+<li><strong>Início de baixo custo.</strong> A única coisa importante que acontece no <code>import</code> é instanciar uma simples classe e não abrir o arquivo(mas não o lê).
+<li><strong>Máxima eficiência.</strong> O exemplo anterior lê o arquivo e dinamicamente através das funções toda vez que queira preencher uma palavra. Esta versão irá armazenar em cache as funções tão cedo elas são construídas, e no pior caso, irá ler do arquivo apenas uma vez, não importa quantas palavras você irá popularizar.
+<li><strong>Serparação entre código e dado.</strong> Todos os dados estão separados em um arquivo. O código é código, e dados são dados, e nunca estarão juntos.
 </ol>
 
 <blockquote class=note>
-<p><span class=u>&#x261E;</span>Is this really nirvana? Well, yes and no. Here&#8217;s something to consider with the <code>LazyRules</code> example: the pattern file is opened (during <code>__init__()</code>), and it remains open until the final rule is reached. Python will eventually close the file when it exits, or after the last instantiation of the <code>LazyRules</code> class is destroyed, but still, that could be a <em>long</em> time. If this class is part of a long-running Python process, the Python interpreter may never exit, and the <code>LazyRules</code> object may never get destroyed.
-<p>There are ways around this. Instead of opening the file during <code>__init__()</code> and leaving it open while you read rules one line at a time, you could open the file, read all the rules, and immediately close the file. Or you could open the file, read one rule, save the file position with the <a href=files.html#read><code>tell()</code> method</a>, close the file, and later re-open it and use the <a href=files.html#read><code>seek()</code> method</a> to continue reading where you left off. Or you could not worry about it and just leave the file open, like this example code does. Programming is design, and design is all about trade-offs and constraints. Leaving a file open too long might be a problem; making your code more complicated might be a problem. Which one is the bigger problem depends on your development team, your application, and your runtime environment.
+<p><span class=u>&#x261E;</span>Este é realmente o nirvana? Bem, Sim e não. Aqui há algo a considerar como um exemplo <em>preguiçoso</em> de <code>LazyRules</code> : o arquivo está aberto(durante o <code>__init__()</code>), e estará aberto até chegar ao fim do arquivo. Python eventualmente irá fechar o arquivo quando terminar, ou quando a última instância da classe <code>LazyRules</code> é distribuída, mas ainda, pode persistir por um <em>longo</em> tempo. Se esta classe é parte de um processo Python rodando a muito tempo, o interpretador pode nunca terminar, e o objeto  <code>LazyRules</code> pode nunca ser destruído.
+<p>Há mais formas para isto. Invés de abrir o arquivo durante o <code>__init__()</code> e deixá-lo aberto enquanto lê cada linha uma por vez, você poderia ler todas elas, e imediatamente fechar o arquivo. Ou você poderia ler uma linha do arquivo, salvar sua posição com o <a href=files.html#read>método <code>tell()</code></a>, fechar o arquivo, e re-abrir e usar o <a href=files.html#read>método <code>seek()</code></a> para continuar a ler em qualquer ponto que você tenha saído. Ou você poderia apenas deixar aberto, como no exemplo. Programação é design, e design é tudo moda e contexto. Deixar o arquivo aberto por um longo tempo pode causar um problema; fazendo seu código mais complicado e trazendo problemas. Que será um grande problema dependendo de sua equipe de desenvolvimento, da sua aplicação e de seu ambiente de execusão.
 </blockquote>
 
 <p class=a>&#x2042;
 
-<h2 id=furtherreading>Further Reading</h2>
+<h2 id=furtherreading>Leituras posteriores</h2>
 <ul>
 <li><a href=http://docs.python.org/3.1/library/stdtypes.html#iterator-types>Iterator types</a>
 <li><a href=http://www.python.org/dev/peps/pep-0234/>PEP 234: Iterators</a>
